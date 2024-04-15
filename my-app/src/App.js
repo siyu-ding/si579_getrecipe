@@ -6,28 +6,27 @@ import './App.css';
 
 
 const App = () => {
+  // State hooks to track user's selected ingredients and tools.
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [selectedTool, setSelectedTool] = useState('');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  // Toggle the selection state of an ingredient
+  // Toggles the inclusion of an ingredient in the selectedIngredients state.
   const toggleIngredient = (ingredient) => {
     setSelectedIngredients((prevSelected) =>
       prevSelected.includes(ingredient)
-        ? prevSelected.filter((i) => i !== ingredient)
-        : [...prevSelected, ingredient]
+        ? prevSelected.filter((i) => i !== ingredient)// Remove if already selected
+        : [...prevSelected, ingredient]// Add if not selected
     );
   };
 
-  // Select a single tool at a time
+  // Selects or deselects a tool.
   const onSelectTool = (toolName) => {
     setSelectedTool((prevSelectedTool) => prevSelectedTool === toolName ? '' : toolName);
   };
 
-
-  
-
-  // Define ingredients data
+  // Data arrays for vegetables, non-vegetarian options, staples, and tools.
+  // Each ingredient/tool has a label and, if applicable, an emoji for display.
   const Vegetables = [
     { label: 'Potato', emoji: '🥔' },
     { label: 'Carrot', emoji: '🥕' },
@@ -163,9 +162,13 @@ const App = () => {
     }
   ];
 
+  // Effect hook that updates the list of filtered recipes based on selections.
   useEffect(() => {
+    // This inner function filters the recipe list based on selections.
     const getFilteredRecipes = () => {
       return recipes.filter((recipe) => {
+        // Checks if all selected ingredients are in the recipe's ingredient list.
+        // Also, checks if the selected tool matches the recipe's required tool.
         const ingredientsMatch = selectedIngredients.length === 0 || selectedIngredients.every(ingredient =>
           recipe.ingredients.includes(ingredient)
         );
@@ -174,10 +177,13 @@ const App = () => {
       });
     };
 
+    // Sets the filteredRecipes state with the result from getFilteredRecipes.
     setFilteredRecipes(getFilteredRecipes());
-  }, [selectedIngredients, selectedTool, recipes]);
-
-
+  }, [selectedIngredients, selectedTool, recipes]);// Dependencies for the useEffect.
+  
+  
+  // The render method returns the UI of the app.
+  // It uses subcomponents like DescriptionComponent, IngredientList, and ToolSelector.
   return (
     <div className="app-container">
       <DescriptionComponent
