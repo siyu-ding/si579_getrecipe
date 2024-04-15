@@ -1,0 +1,19 @@
+.ingredient-tag {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+  }
+  
+  .ingredient-tag:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .ingredient-tag.selected {
+    background-color: #4caf50; /* Selected state color */
+    color: white;
+    border-color: #4caf50;
+  }

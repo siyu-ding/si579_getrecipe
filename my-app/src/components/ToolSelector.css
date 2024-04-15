@@ -1,0 +1,18 @@
+.tool-selector {
+    display: flex;
+    gap: 10px;
+    /* justify-content: center; */
+  }
+  
+  .tool-button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    cursor: pointer;
+  }
+  
+  .tool-button.active {
+    background-color: #e7e7e7;
+    border-color: #aaa;
+    font-weight: bold;
+  }
